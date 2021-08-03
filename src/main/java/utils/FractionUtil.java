@@ -49,7 +49,7 @@ public class FractionUtil {
      * @return
      */
     public static String format(Fraction fraction) {
-        String temp = fraction.getClass() + DIVISION_SIGN + fraction.getDenominator();
+        String temp = fraction.getNumerator() + DIVISION_SIGN + fraction.getDenominator();
         if (!checkIsValid(temp)) {
             System.out.println("此分数不合法");
         }
