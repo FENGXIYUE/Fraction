@@ -10,12 +10,12 @@ package exception;
 public class ArgumentNotValidException extends RuntimeException {
     private String message;
 
-    public ArgumentNotValidException(Throwable cause){
+    public ArgumentNotValidException(Throwable cause) {
         super(cause);
 
     }
 
-    public ArgumentNotValidException(String message){
+    public ArgumentNotValidException(String message) {
         super(message);
         this.message = message;
 
