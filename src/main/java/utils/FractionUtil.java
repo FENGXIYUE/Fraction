@@ -23,7 +23,7 @@ public class FractionUtil {
      * @param fraction
      * @return
      */
-    public Fraction parse(String fraction) {
+    public static Fraction parse(String fraction) {
         if (!checkIsValid(fraction)) {
             System.out.println("此分数不合法");
         }
@@ -38,18 +38,17 @@ public class FractionUtil {
         }
         int commonFactor = MathUtil.getCommonFactor(numerator, denominator);
 
-
-        Fraction build = Fraction.builder().numerator(numerator / commonFactor).denominator(denominator / commonFactor).build();
+        Fraction build = Fraction.builder().numerator(numerator / commonFactor).denominator(denominator / commonFactor).result(new BigDecimal(numerator/denominator)).build();
         return build;
     }
 
     /**
-     * raction To String
+     * Fraction To String
      *
      * @param fraction
      * @return
      */
-    public String format(Fraction fraction) {
+    public static String format(Fraction fraction) {
         String temp = fraction.getClass() + DIVISION_SIGN + fraction.getDenominator();
         if (!checkIsValid(temp)) {
             System.out.println("此分数不合法");
