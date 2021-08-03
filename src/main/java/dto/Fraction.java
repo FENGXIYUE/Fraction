@@ -5,6 +5,8 @@ import lombok.Builder;
 import lombok.Data;
 import lombok.NoArgsConstructor;
 
+import java.math.BigDecimal;
+
 /**
  * @author: LLT
  * @description:
@@ -26,8 +28,9 @@ public class Fraction {
      */
     private int denominator;
 
-    @Override
-    public String toString() {
-        return this.numerator + "/" + this.denominator;
-    }
+    /**
+     * 结果
+     */
+    private BigDecimal result;
+
 }
