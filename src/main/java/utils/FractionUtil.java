@@ -87,4 +87,8 @@ public class FractionUtil {
 
         return true;
     }
+
+    public static String calculate(String Fraction1,String fraction2,String operator){
+        return "无敌!";
+    }
 }
