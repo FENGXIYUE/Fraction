@@ -14,13 +14,17 @@ import java.util.Scanner;
  */
 @Slf4j
 public class AppStarter {
+
+    private static String OPTION_MSG = "1 分数转小数"
+            + "\r\n" + "2 分数间运算"
+            + "\r\n" + "3 退出此程序";
+
     public static void main(String[] args) {
         Scanner scanner = new Scanner(System.in);
+
         System.out.println("欢迎使用分数运算工具："
-                + "\r\n" + "请输入对应编码"
-                + "\r\n" + "1 分数转小数"
-                + "\r\n" + "2 分数间运算"
-                + "\r\n" + "3 退出此程序");
+                + "\r\n" +"请输入对应编码"
+                + "\r\n" +  OPTION_MSG);
         while (true) {
             try {
                 String inputLine = scanner.nextLine();
@@ -31,6 +35,7 @@ public class AppStarter {
                     String fraction = ExpressionPrepareUtil.removeStrSpace(scanner.nextLine());
                     //计算对应的小数值
                     System.out.println("结果为：" + FractionUtil.parse(fraction).getResult());
+                    System.out.println(OPTION_MSG);
                 } else if ("2".equals(inputLine)) {
                     System.out.println("运算表达式");
                     String expression = scanner.nextLine();
@@ -42,15 +47,11 @@ public class AppStarter {
                 if (e instanceof ArgumentNotValidException) {
                     log.error(e.getMessage()
                             + "\r\n" + "请输入正确编码"
-                            + "\r\n" + "1 分数转小数"
-                            + "\r\n" + "2 分数间运算"
-                            + "\r\n" + "3 退出此程序");
+                            + "\r\n" +  OPTION_MSG);
                 } else if (e instanceof FractionArithmeticException) {
                     log.error(e.getMessage()
                             + "\r\n" + "请重新选择"
-                            + "\r\n" + "1 分数转小数"
-                            + "\r\n" + "2 分数间运算"
-                            + "\r\n" + "3 退出此程序");
+                            + "\r\n" +  OPTION_MSG);
                 }
 
             }
