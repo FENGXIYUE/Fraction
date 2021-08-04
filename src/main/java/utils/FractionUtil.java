@@ -1,8 +1,7 @@
 package utils;
 
-import cn.hutool.core.util.ObjectUtil;
 import dto.Fraction;
-import org.apache.commons.lang3.ObjectUtils;
+import exception.FractionArithmeticException;
 import org.apache.commons.lang3.StringUtils;
 
 import java.math.BigDecimal;
@@ -27,7 +26,7 @@ public class FractionUtil {
      */
     public static Fraction parse(String fraction) {
         if (!checkIsValid(fraction)) {
-            System.out.println("此分数不合法");
+            throw new FractionArithmeticException("此分数不合法");
         }
         String[] split = fraction.split(DIVISION_SIGN);
         int numerator = Integer.parseInt(split[0]);
