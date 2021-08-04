@@ -1,6 +1,8 @@
 package utils;
 
+import cn.hutool.core.util.ObjectUtil;
 import dto.Fraction;
+import org.apache.commons.lang3.ObjectUtils;
 import org.apache.commons.lang3.StringUtils;
 
 import java.math.BigDecimal;
@@ -32,13 +34,13 @@ public class FractionUtil {
         int denominator = Integer.parseInt(split[1]);
 
         if (0 == numerator) {
-            return Fraction.builder().result(BigDecimal.ZERO).build();
+            return Fraction.builder().numerator(0).denominator(1).result(BigDecimal.ZERO).build();
         } else if (numerator == denominator) {
-            return Fraction.builder().result(BigDecimal.ONE).build();
+            return Fraction.builder().numerator(1).denominator(1).result(BigDecimal.ONE).build();
         }
         int commonFactor = MathUtil.getCommonFactor(numerator, denominator);
 
-        Fraction build = Fraction.builder().numerator(numerator / commonFactor).denominator(denominator / commonFactor).result(new BigDecimal(numerator/denominator)).build();
+        Fraction build = Fraction.builder().numerator(numerator / commonFactor).denominator(denominator / commonFactor).result((new BigDecimal(numerator)).divide(new BigDecimal(denominator))).build();
         return build;
     }
 
@@ -50,8 +52,8 @@ public class FractionUtil {
      */
     public static String format(Fraction fraction) {
         String temp = fraction.getNumerator() + DIVISION_SIGN + fraction.getDenominator();
-        if (!checkIsValid(temp)) {
-            System.out.println("此分数不合法");
+        if (fraction.getResult().equals(BigDecimal.ONE) || fraction.getResult().equals(BigDecimal.ZERO)) {
+            return fraction.getResult().toString();
         }
         return temp;
     }

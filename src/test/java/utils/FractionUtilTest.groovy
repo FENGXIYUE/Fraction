@@ -12,16 +12,29 @@ import spock.lang.Unroll
  */
 class FractionUtilTest extends Specification {
     def "Parse"() {
+
+        when:
+        Fraction fraction = FractionUtil.parse(inputstr)
+        then:
+        numerator == fraction.getNumerator();
+        denominator == fraction.getDenominator();
+        result == fraction.getResult();
+        where:
+        inputstr | numerator | denominator | result
+        "1/4"    | 1         | 4           | new BigDecimal(0.25)
     }
 
     def "Format"() {
         given:
-        def fraction = new Fraction(numerator: numerator, denominator: denominator)
+        def fraction = new Fraction(numerator: numerator, denominator: denominator, result: result)
         expect:
-        result == FractionUtil.format(fraction)
+        response == FractionUtil.format(fraction)
         where:
-        result | numerator | denominator
-        "1/4"  | 1         | 4
+        response | numerator | denominator | result
+        "1/4"    | 1         | 4           | 0.25
+        "1"      | 1         | 1           | 1
+        "0"      | 0         | 1           | 0
+
     }
 
     @Unroll
