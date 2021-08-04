@@ -1,5 +1,8 @@
 import exception.ArgumentNotValidException;
+import exception.FractionArithmeticException;
 import lombok.extern.slf4j.Slf4j;
+import util.ExpressionPrepareUtil;
+import utils.FractionUtil;
 
 import java.util.Scanner;
 
@@ -25,8 +28,9 @@ public class AppStarter {
                     break;
                 } else if ("1".equals(inputLine)) {
                     System.out.println("待转化分数");
-                    String fraction = scanner.nextLine();
-                    System.out.println("结果为：");
+                    String fraction = ExpressionPrepareUtil.removeStrSpace(scanner.nextLine());
+                    //计算对应的小数值
+                    System.out.println("结果为：" + FractionUtil.parse(fraction).getResult());
                 } else if ("2".equals(inputLine)) {
                     System.out.println("运算表达式");
                     String expression = scanner.nextLine();
@@ -34,12 +38,21 @@ public class AppStarter {
                 } else {
                     throw new ArgumentNotValidException("输入编码异常");
                 }
-            }catch (ArgumentNotValidException e){
-                log.error(e.getMessage()
-                        + "\r\n" + "请输入正确编码"
-                        + "\r\n" + "1 分数转小数"
-                        + "\r\n" + "2 分数间运算"
-                        + "\r\n" + "3 退出此程序");
+            } catch (Exception e) {
+                if (e instanceof ArgumentNotValidException) {
+                    log.error(e.getMessage()
+                            + "\r\n" + "请输入正确编码"
+                            + "\r\n" + "1 分数转小数"
+                            + "\r\n" + "2 分数间运算"
+                            + "\r\n" + "3 退出此程序");
+                } else if (e instanceof FractionArithmeticException) {
+                    log.error(e.getMessage()
+                            + "\r\n" + "请重新选择"
+                            + "\r\n" + "1 分数转小数"
+                            + "\r\n" + "2 分数间运算"
+                            + "\r\n" + "3 退出此程序");
+                }
+
             }
 
 
