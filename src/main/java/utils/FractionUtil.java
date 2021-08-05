@@ -89,6 +89,15 @@ public class FractionUtil {
 
         return true;
     }
+
+    /**
+     * 加减
+     *
+     * @param fraction1
+     * @param fraction2
+     * @param isAdd
+     * @return
+     */
     public static Fraction addSub(Fraction fraction1,Fraction fraction2, boolean isAdd) {
         int numerator;
         int denominator = fraction1.getDenominator() * fraction2.getDenominator();
@@ -102,6 +111,30 @@ public class FractionUtil {
         return parse(numerator + DIVISION_SIGN + denominator);
 
 }
+
+    /**
+     * 加减
+     *
+     * @param fraction1
+     * @param fraction2
+     * @param isMultiply
+     * @return
+     */
+    public static Fraction mulDiv(Fraction fraction1,Fraction fraction2, boolean isMultiply) {
+        int numerator;
+        int denominator;
+        if(isMultiply){
+            numerator = fraction1.getNumerator() * fraction2.getNumerator();
+            denominator = fraction1.getDenominator() * fraction2.getDenominator();
+        }else{
+            numerator = fraction1.getNumerator() * fraction2.getDenominator();
+            denominator = fraction1.getDenominator() * fraction2.getNumerator();
+        }
+        System.out.println(numerator + DIVISION_SIGN + denominator);
+        return parse(numerator + DIVISION_SIGN + denominator);
+
+    }
+
     public static String calculateExpression(String fraction1, String fraction2, String operator) {
         Fraction response = Fraction.builder().build();
 
@@ -110,10 +143,9 @@ public class FractionUtil {
         } else if (OperatorEnum.SUBTRACT.getValue().equals(operator)) {
             response = addSub(parse(fraction1),parse(fraction2),false);
         } else if (OperatorEnum.MULTIPLY.getValue().equals(operator)) {
-
-
+            response = mulDiv(parse(fraction1),parse(fraction2),true);
         } else if (OperatorEnum.DIVIDE.getValue().equals(operator)) {
-
+            response = mulDiv(parse(fraction1),parse(fraction2),false);
         }
         return fraction1 + operator + fraction2 + "=" + format(response);
     }
