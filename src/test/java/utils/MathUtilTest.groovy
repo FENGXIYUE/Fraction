@@ -21,4 +21,19 @@ class MathUtilTest extends Specification {
         4      | 4 | 4
 
     }
+
+    @Unroll
+    def "isNumeric"() {
+        expect:
+        result == MathUtil.isNumeric(str)
+        where:
+        result | str
+        true   | "4"
+        true   | "2222"
+        true   | "-4"
+        false  | "!4"
+        false  | "--4"
+        false  | "1.2"
+
+    }
 }

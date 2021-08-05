@@ -1,5 +1,8 @@
 package utils;
 
+import java.util.regex.Matcher;
+import java.util.regex.Pattern;
+
 /**
  * @author: LLT
  * @description:
@@ -27,5 +30,15 @@ public class MathUtil {
             }
         }
         return min;
+    }
+
+    //判断字符是否为数字
+    public static boolean isNumeric(String strNum) {
+//        String pattern = "^[\\+\\-]?[\\d]+(\\.[\\d]+)?$";
+        String pattern = "^[\\+\\-]?[\\d]*?$";
+        Pattern r = Pattern.compile(pattern);
+        Matcher m = r.matcher(strNum);
+
+        return m.matches();
     }
 }
