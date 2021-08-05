@@ -1,5 +1,6 @@
 package utils;
 
+import constants.OperatorEnum;
 import dto.Fraction;
 import exception.FractionArithmeticException;
 import org.apache.commons.lang3.StringUtils;
@@ -51,7 +52,7 @@ public class FractionUtil {
      */
     public static String format(Fraction fraction) {
         String temp = fraction.getNumerator() + DIVISION_SIGN + fraction.getDenominator();
-        if (fraction.getResult().equals(BigDecimal.ONE) || fraction.getResult().equals(BigDecimal.ZERO)) {
+        if (fraction.getNumerator()%fraction.getDenominator()==0) {
             return fraction.getResult().toString();
         }
         return temp;
@@ -77,6 +78,7 @@ public class FractionUtil {
         }
 
         //必须为数字
+
         if (!Arrays.stream(split).allMatch(StringUtils::isNumeric)) {
             return false;
         }
@@ -87,8 +89,32 @@ public class FractionUtil {
 
         return true;
     }
+    public static Fraction addSub(Fraction fraction1,Fraction fraction2, boolean isAdd) {
+        int numerator;
+        int denominator = fraction1.getDenominator() * fraction2.getDenominator();
+        if(isAdd){
+            numerator = fraction1.getNumerator() * fraction2.getDenominator() + fraction1.getDenominator() * fraction2.getNumerator();
 
-    public static String calculate(String Fraction1,String fraction2,String operator){
-        return "无敌!";
+        }else{
+            numerator = fraction1.getNumerator() * fraction2.getDenominator() - fraction1.getDenominator() * fraction2.getNumerator();
+        }
+        System.out.println(numerator + DIVISION_SIGN + denominator);
+        return parse(numerator + DIVISION_SIGN + denominator);
+
+}
+    public static String calculateExpression(String fraction1, String fraction2, String operator) {
+        Fraction response = Fraction.builder().build();
+
+        if (OperatorEnum.ADD.getValue().equals(operator)) {
+            response = addSub(parse(fraction1),parse(fraction2),true);
+        } else if (OperatorEnum.SUBTRACT.getValue().equals(operator)) {
+            response = addSub(parse(fraction1),parse(fraction2),false);
+        } else if (OperatorEnum.MULTIPLY.getValue().equals(operator)) {
+
+
+        } else if (OperatorEnum.DIVIDE.getValue().equals(operator)) {
+
+        }
+        return fraction1 + operator + fraction2 + "=" + format(response);
     }
 }

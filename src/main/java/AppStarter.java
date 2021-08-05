@@ -52,7 +52,7 @@ public class AppStarter {
                     String fraction1 = ExpressionPrepareUtil.removeStrSpace(scanner.nextLine());
                     System.out.println("请输入第二个分数");
                     String fraction2 = ExpressionPrepareUtil.removeStrSpace(scanner.nextLine());
-                    System.out.println("结果为：" + FractionUtil.calculate(fraction1,fraction2,operator));
+                    System.out.println("结果为：" + FractionUtil.calculateExpression(fraction1,fraction2,operator));
                     System.out.println(OPTION_MSG);
 
                 } else {
