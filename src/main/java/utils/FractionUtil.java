@@ -113,7 +113,7 @@ public class FractionUtil {
 }
 
     /**
-     * 加减
+     * 乘除
      *
      * @param fraction1
      * @param fraction2
@@ -135,6 +135,14 @@ public class FractionUtil {
 
     }
 
+    /**
+     * 计算
+     *
+     * @param fraction1
+     * @param fraction2
+     * @param operator
+     * @return
+     */
     public static String calculateExpression(String fraction1, String fraction2, String operator) {
         Fraction response = Fraction.builder().build();
 
