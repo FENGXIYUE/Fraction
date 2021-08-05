@@ -79,7 +79,7 @@ public class FractionUtil {
 
         //必须为数字
 
-        if (!Arrays.stream(split).allMatch(StringUtils::isNumeric)) {
+        if (!Arrays.stream(split).allMatch(MathUtil::isNumeric)) {
             return false;
         }
         //分子不能为0

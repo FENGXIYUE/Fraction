@@ -13,6 +13,7 @@ public class MathUtil {
 
     /**
      * 计算a,b两个数的公因数
+     *
      * @param a
      * @param b
      * @return
@@ -29,12 +30,14 @@ public class MathUtil {
                 remainder = max % min;
             }
         }
-        return min;
+        return Math.abs(min);
     }
 
-    //判断字符是否为数字
+    /**
+     * 判断字符是否为数字
+     */
     public static boolean isNumeric(String strNum) {
-//        String pattern = "^[\\+\\-]?[\\d]+(\\.[\\d]+)?$";
+        //String pattern = "^[\\+\\-]?[\\d]+(\\.[\\d]+)?$";
         String pattern = "^[\\+\\-]?[\\d]*?$";
         Pattern r = Pattern.compile(pattern);
         Matcher m = r.matcher(strNum);
